@@ -1,4 +1,4 @@
-Elixir Meetup - Mexico D.F. - July 2017
+Elixir Meetup - Mexico City - July 2017
 =======================================
 
 Slides for 'Ellxir Macros' talk

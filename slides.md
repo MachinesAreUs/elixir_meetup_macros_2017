@@ -17,12 +17,12 @@ class: middle
 class: middle
 # ¡Elixir no es mi lenguaje favorito!
 
-![John McCarthy](./img/scream.jpg)
+![scream](./img/scream.jpg)
 
 ---
 class: center, middle
 
-# Pero es bastante interesante, 
+# Pero es bastante interesante,
 # muy productivo y la plataforma es increíble.
 
 ---
@@ -73,7 +73,7 @@ class: middle
 ---
 class: middle
 ## .center[¿Cuáles son las palabras reservadas de Elixir?]
-  
+
 - def ?
 - defmodule ?
 - import ?
@@ -84,9 +84,9 @@ class: middle
 ---
 class: center, middle
 
-## Todas estas son macros  
+## Todas estas son macros
 
-! && || .. in <> @ alias! and or binding defmodule def defp defprotocol defimpl defmacro defmacrop defstruct defoverridable defdelegate defexception destructure get_and_update_in if is_nil match? put_in raise reraise sigil_C sigil_D sigil_N sigil_R sigil_S sigil_T sigil_W sigil_c sigil_r sigil_s sigil_w to_char_list to_charlist to_string unless update_in use var! |> 
+! && || .. in <> @ alias! and or binding defmodule def defp defprotocol defimpl defmacro defmacrop defstruct defoverridable defdelegate defexception destructure get_and_update_in if is_nil match? put_in raise reraise sigil_C sigil_D sigil_N sigil_R sigil_S sigil_T sigil_W sigil_c sigil_r sigil_s sigil_w to_char_list to_charlist to_string unless update_in use var! |>
 
 https://github.com/elixir-lang/elixir/blob/master/lib/elixir/lib/kernel.ex#L2758
 
@@ -111,11 +111,11 @@ class: center, middle
 # quote
 
 --
-**`quote`** recibe un bloque y convierte el código dentro del mismo a su representación en forma de AST. 
+**`quote`** recibe un bloque y convierte el código dentro del mismo a su representación en forma de AST.
 
 --
 ```elixir
-iex> quote do: 2 + 3 
+iex> quote do: 2 + 3
 
 {:+, [context: Elixir, import: Kernel], [1, 2]}
 ```
@@ -201,7 +201,7 @@ iex> Macro.to_string(prog_ast)
 --
 
 ```elixir
-iex> ast = quote do                       
+iex> ast = quote do
 ...>   unless 1 > 2 do
 ...>     :ok
 ...>   end
@@ -221,7 +221,7 @@ iex> ast2 = Macro.expand_once ast, __ENV__
 --
 
 ```elixir
-iex> IO.puts Macro.to_string(ast2)        
+iex> IO.puts Macro.to_string(ast2)
 
 if(1 > 2) do
   nil
@@ -250,7 +250,7 @@ iex> ast3 = Macro.expand_once ast2, __ENV__
 --
 
 ```elixir
-iex> IO.puts Macro.to_string(ast3)         
+iex> IO.puts Macro.to_string(ast3)
 
 case(1 > 2) do
   x when x in [false, nil] ->
@@ -266,7 +266,7 @@ end
 
 --
 
-**1.** Se define con la macro **`defmacro`**. Sus partes son: 
+**1.** Se define con la macro **`defmacro`**. Sus partes son:
 
   + **nombre**
   + **parámetros** que recibe
@@ -344,10 +344,10 @@ Nuestra macro va a crear un método dentro del módulo desde donde es llamada la
 --
 
 ```elixir
-defmodule MyMacros do                      
+defmodule MyMacros do
   defmacro new_function(name, do: block) do
-    quote do                               
-      def unquote(name)() do               
+    quote do
+      def unquote(name)() do
         unquote(block)
       end
     end
@@ -410,7 +410,7 @@ En la stdlib, el uso de macros es [interesante](https://docs.google.com/spreadsh
 **Ejemplo 1**: Definición de un esquema.
 
 ```elixir
-defmodule MyApp.Comment do  
+defmodule MyApp.Comment do
   use Ecto.Model
   import Ecto.Query
 
@@ -421,7 +421,7 @@ defmodule MyApp.Comment do
 
     belongs_to :post, MyApp.Post
   end
-end  
+end
 ```
 
 --
@@ -548,7 +548,7 @@ news_extractor :EFE,
   copyright_line: [xpath: "NewsItem/NewsComponent/NewsLines/CopyrightLine"],
   creation_date:  [xpath: "NewsItem/Identification/NewsIdentifier/DateId", with: [to_date: "%Y-%m-%d %H:%M:%S%z"],
   body:           [xpath: "NewsItem/NewsComponent/ContentItem/DataContent/body/body.content"],
-  provider:       [literal: "EFE"] 
+  provider:       [literal: "EFE"]
 ```
 --
 
@@ -561,7 +561,7 @@ iex> "saple_news.xml" |> File.read! |> EFE.extract
 %NewsItem{
   headline: "El gobierno de EU puede ver fotos de desnudos, segun Edward Snowden",
   body: "John Oliver, comediante de la cadena de television HBO, dio su mejor golpe hasta el momento: una entrevista a profundidad con Edward Snowden, excontratista de la Agencia Nacional de Seguridad (NSA, por sus siglas en ingles) de Estados Unidos.",
-  creation_date: #Ecto.DateTime<2015-07-17T06:13:05Z>, 
+  creation_date: #Ecto.DateTime<2015-07-17T06:13:05Z>,
   provider: "EFE"
   copyright_line: "© EFE 2015. Está expresamente prohibida la redistribución y la redifusión de todo o parte de los contenidos de los servicios de Efe, sin previo y expreso consentimiento de la Agencia EFE S.A."}
 ```
