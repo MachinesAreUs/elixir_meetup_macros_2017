@@ -131,7 +131,7 @@ iex(35)> quote do: 2 + 3 * 5
 
 --
 ```elixir
-iex> String.reverse("hola")
+iex> quote do: String.reverse("hola")
 
 {{:., [], [{:__aliases__, [alias: false], [:String]}, :reverse]}, [], ["hola"]}
 ```
